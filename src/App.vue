@@ -1,3 +1,7 @@
 <template>
-  <h1 class="text-3xl font-bold text-blue-500">Tailwind Working</h1>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <router-view />
+  </div>
 </template>
+
+<script setup lang="ts"></script>
