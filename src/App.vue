@@ -1,7 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-50 text-slate-900">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script setup lang="ts"></script>

@@ -14,7 +14,6 @@ const router = createRouter({
       path: '/product/:id',
       name: 'product-detail',
       component: ProductDetailView,
-      props: true,
     },
   ],
   scrollBehavior() {
