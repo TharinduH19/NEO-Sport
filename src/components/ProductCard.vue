@@ -34,21 +34,33 @@
           <p class="text-xs text-slate-500">{{ product.brand }}</p>
         </div>
 
-        <RouterLink
-          :to="`/product/${product.id}`"
-          class="rounded-full bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
-        >
-          View
-        </RouterLink>
+        <div class="flex gap-2">
+          <button
+            @click="addToCart(product)"
+            class="rounded-full border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-700 hover:text-white"
+          >
+            Add
+          </button>
+
+          <RouterLink
+            :to="`/product/${product.id}`"
+            class="rounded-full bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
+          >
+            View
+          </RouterLink>
+        </div>
       </div>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
+import { useCart } from '../composables/useCart'
 import type { Product } from '../types/product'
 
 defineProps<{
   product: Product
 }>()
+
+const { addToCart } = useCart()
 </script>

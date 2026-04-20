@@ -5,8 +5,10 @@
 
     <FilterBar
       :categories="categories"
+      :result-count="filteredProducts.length"
       @search="handleSearch"
       @filter="handleFilter"
+      @clear="clearFilters"
     />
 
     <LoadingSpinner v-if="isLoading" />
@@ -60,6 +62,11 @@ function handleSearch(value: string): void {
 
 function handleFilter(value: string): void {
   selectedCategory.value = value
+}
+
+function clearFilters(): void {
+  searchText.value = ''
+  selectedCategory.value = 'All'
 }
 
 async function loadProducts(): Promise<void> {

@@ -77,6 +77,7 @@
             </div>
 
             <button
+              @click="addToCart(product)"
               class="rounded-full bg-emerald-700 px-6 py-3 text-sm font-bold text-white transition hover:scale-[1.02]"
             >
               Add to Cart
@@ -95,10 +96,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useCart } from '../composables/useCart'
 import { fetchProductById } from '../services/api'
 import type { Product } from '../types/product'
 
 const route = useRoute()
+const { addToCart } = useCart()
+
 const product = ref<Product | null>(null)
 const isLoading = ref<boolean>(true)
 const errorMessage = ref<string>('')

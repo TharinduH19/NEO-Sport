@@ -25,7 +25,18 @@
           >
             {{ category }}
           </button>
+
+          <button
+            @click="clearFilters"
+            class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-emerald-700 hover:text-emerald-700"
+          >
+            Clear
+          </button>
         </div>
+      </div>
+
+      <div class="mt-4 text-sm text-slate-600">
+        Showing <span class="font-semibold text-slate-900">{{ resultCount }}</span> result(s)
       </div>
     </div>
   </section>
@@ -34,13 +45,15 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   categories: string[]
+  resultCount: number
 }>()
 
 const emit = defineEmits<{
   (e: 'search', value: string): void
   (e: 'filter', value: string): void
+  (e: 'clear'): void
 }>()
 
 const search = ref('')
@@ -49,6 +62,12 @@ const selectedCategory = ref('All')
 function selectCategory(category: string): void {
   selectedCategory.value = category
   emit('filter', category)
+}
+
+function clearFilters(): void {
+  search.value = ''
+  selectedCategory.value = 'All'
+  emit('clear')
 }
 
 watch(search, (value) => {

@@ -16,8 +16,24 @@
         <a href="#categories" class="text-sm font-medium text-white/90 hover:text-white">Categories</a>
         <a href="#about" class="text-sm font-medium text-white/90 hover:text-white">About</a>
       </nav>
+
+      <RouterLink
+        to="/cart"
+        class="relative rounded-full bg-white px-5 py-2 text-sm font-semibold text-emerald-700 transition hover:scale-[1.02]"
+      >
+        Cart
+        <span
+          class="ml-2 rounded-full bg-emerald-700 px-2 py-0.5 text-xs font-bold text-white"
+        >
+          {{ totalItems }}
+        </span>
+      </RouterLink>
     </div>
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCart } from '../composables/useCart'
+
+const { totalItems } = useCart()
+</script>
