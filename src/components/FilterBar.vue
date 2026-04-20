@@ -1,52 +1,51 @@
 <template>
-  <section id="categories" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5 shadow-2xl shadow-black/20">
       <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div class="w-full lg:max-w-md">
           <input
             v-model="search"
             type="text"
-            placeholder="Search supermarket products..."
-            class="w-full rounded-full border border-slate-300 px-5 py-3 text-sm outline-none transition focus:border-emerald-600"
+            placeholder="Search sports products..."
+            class="w-full rounded-full border border-slate-700 bg-slate-950 px-5 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-lime-400"
           />
         </div>
 
         <div class="flex flex-wrap gap-2">
           <button
-            v-for="category in categories"
-            :key="category"
-            @click="selectCategory(category)"
+            v-for="item in filterItems"
+            :key="item"
+            @click="selectCategory(item)"
             :class="[
               'rounded-full px-4 py-2 text-sm font-semibold transition',
-              selectedCategory === category
-                ? 'bg-emerald-700 text-white'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              selectedCategory === item
+                ? 'bg-lime-400 text-slate-950'
+                : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
             ]"
           >
-            {{ category }}
+            {{ item }}
           </button>
 
           <button
             @click="clearFilters"
-            class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-emerald-700 hover:text-emerald-700"
+            class="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-lime-400 hover:text-lime-400"
           >
             Clear
           </button>
         </div>
       </div>
 
-      <div class="mt-4 text-sm text-slate-600">
-        Showing <span class="font-semibold text-slate-900">{{ resultCount }}</span> result(s)
-      </div>
+      <p class="mt-4 text-sm text-slate-400">
+        Showing <span class="font-bold text-white">{{ resultCount }}</span> sports item(s)
+      </p>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
-const props = defineProps<{
-  categories: string[]
+defineProps<{
   resultCount: number
 }>()
 
@@ -58,6 +57,8 @@ const emit = defineEmits<{
 
 const search = ref('')
 const selectedCategory = ref('All')
+
+const filterItems = computed(() => ['All', 'Sports'])
 
 function selectCategory(category: string): void {
   selectedCategory.value = category

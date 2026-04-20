@@ -18,3 +18,9 @@ export interface ProductResponse {
   skip: number
   limit: number
 }
+
+export interface CategoryItem {
+  slug: string
+  name: string
+  url: string
+}

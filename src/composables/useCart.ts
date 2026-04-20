@@ -6,71 +6,65 @@ export interface CartItem {
   title: string
   price: number
   thumbnail: string
-  category: string
   quantity: number
 }
 
-const CART_STORAGE_KEY = 'supermarket-cart'
+const STORAGE_KEY = 'sport-store-cart'
 
-const savedCart = localStorage.getItem(CART_STORAGE_KEY)
+const stored = localStorage.getItem(STORAGE_KEY)
 
-const cartItems = ref<CartItem[]>(
-  savedCart ? JSON.parse(savedCart) as CartItem[] : []
-)
+const cartItems = ref<CartItem[]>(stored ? JSON.parse(stored) : [])
 
 watch(
   cartItems,
   (value) => {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(value))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(value))
   },
   { deep: true }
 )
 
 export function useCart() {
-  const totalItems = computed<number>(() => {
-    return cartItems.value.reduce((total, item) => total + item.quantity, 0)
-  })
+  const totalItems = computed(() =>
+    cartItems.value.reduce((sum, item) => sum + item.quantity, 0)
+  )
 
-  const totalPrice = computed<number>(() => {
-    return cartItems.value.reduce((total, item) => total + item.price * item.quantity, 0)
-  })
+  const totalPrice = computed(() =>
+    cartItems.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  )
 
   function addToCart(product: Product): void {
-    const existingItem = cartItems.value.find((item) => item.id === product.id)
+    const found = cartItems.value.find((item) => item.id === product.id)
 
-    if (existingItem) {
-      existingItem.quantity += 1
+    if (found) {
+      found.quantity += 1
     } else {
       cartItems.value.push({
         id: product.id,
         title: product.title,
         price: product.price,
         thumbnail: product.thumbnail,
-        category: product.category,
         quantity: 1,
       })
     }
   }
 
-  function removeFromCart(productId: number): void {
-    cartItems.value = cartItems.value.filter((item) => item.id !== productId)
+  function removeFromCart(id: number): void {
+    cartItems.value = cartItems.value.filter((item) => item.id !== id)
   }
 
-  function increaseQuantity(productId: number): void {
-    const item = cartItems.value.find((cartItem) => cartItem.id === productId)
-    if (item) {
-      item.quantity += 1
-    }
+  function increaseQuantity(id: number): void {
+    const found = cartItems.value.find((item) => item.id === id)
+    if (found) found.quantity += 1
   }
 
-  function decreaseQuantity(productId: number): void {
-    const item = cartItems.value.find((cartItem) => cartItem.id === productId)
-    if (item) {
-      if (item.quantity > 1) {
-        item.quantity -= 1
-      } else {
-        removeFromCart(productId)
-      }
+  function decreaseQuantity(id: number): void {
+    const found = cartItems.value.find((item) => item.id === id)
+    if (!found) return
+
+    if (found.quantity > 1) {
+      found.quantity -= 1
+    } else {
+      removeFromCart(id)
     }
   }
 

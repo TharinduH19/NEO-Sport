@@ -1,10 +1,9 @@
 <template>
-  <div class="min-h-screen bg-slate-50">
+  <div class="min-h-screen bg-slate-950">
     <NavBar />
     <HeroSection />
 
     <FilterBar
-      :categories="categories"
       :result-count="filteredProducts.length"
       @search="handleSearch"
       @filter="handleFilter"
@@ -20,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import NavBar from '../components/NavBar.vue'
 import HeroSection from '../components/HeroSection.vue'
 import FilterBar from '../components/FilterBar.vue'
@@ -28,20 +27,14 @@ import ProductGrid from '../components/ProductGrid.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import ErrorMessage from '../components/ErrorMessage.vue'
 import AppFooter from '../components/AppFooter.vue'
-import { fetchProducts } from '../services/api'
+import { fetchSportsProducts, searchSportsProducts } from '../services/api'
 import type { Product } from '../types/product'
 
 const products = ref<Product[]>([])
 const isLoading = ref<boolean>(true)
 const errorMessage = ref<string>('')
-
 const searchText = ref<string>('')
 const selectedCategory = ref<string>('All')
-
-const categories = computed<string[]>(() => {
-  const uniqueCategories = new Set(products.value.map((product) => product.category))
-  return ['All', ...Array.from(uniqueCategories)]
-})
 
 const filteredProducts = computed<Product[]>(() => {
   return products.value.filter((product) => {
@@ -49,8 +42,7 @@ const filteredProducts = computed<Product[]>(() => {
       product.title.toLowerCase().includes(searchText.value.toLowerCase())
 
     const matchesCategory =
-      selectedCategory.value === 'All' ||
-      product.category === selectedCategory.value
+      selectedCategory.value === 'All' || product.category === 'sports-accessories'
 
     return matchesSearch && matchesCategory
   })
@@ -67,13 +59,19 @@ function handleFilter(value: string): void {
 function clearFilters(): void {
   searchText.value = ''
   selectedCategory.value = 'All'
+  loadProducts()
 }
 
 async function loadProducts(): Promise<void> {
   try {
     isLoading.value = true
     errorMessage.value = ''
-    products.value = await fetchProducts()
+
+    if (searchText.value.trim()) {
+      products.value = await searchSportsProducts(searchText.value)
+    } else {
+      products.value = await fetchSportsProducts()
+    }
   } catch (error) {
     if (error instanceof Error) {
       errorMessage.value = error.message
@@ -84,6 +82,10 @@ async function loadProducts(): Promise<void> {
     isLoading.value = false
   }
 }
+
+watch(searchText, () => {
+  loadProducts()
+})
 
 onMounted(() => {
   loadProducts()

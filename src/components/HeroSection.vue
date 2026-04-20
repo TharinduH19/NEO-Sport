@@ -1,66 +1,72 @@
 <template>
-  <section class="bg-gradient-to-r from-emerald-700 to-green-600 text-white">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-2 lg:px-8">
+  <section
+    id="hero"
+    class="relative overflow-hidden bg-[radial-gradient(circle_at_top_right,_rgba(132,204,22,0.22),_transparent_35%),linear-gradient(135deg,#020617,#0f172a,#111827)]"
+  >
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-2 lg:gap-12 lg:px-8">
       <div class="flex flex-col justify-center">
-        <p class="mb-4 inline-block w-fit rounded-full bg-white/15 px-4 py-2 text-sm font-medium">
-          Daily essentials
-        </p>
+        <span
+          class="mb-5 inline-flex w-fit rounded-full border border-lime-400/30 bg-lime-400/10 px-4 py-2 text-sm font-semibold text-lime-300"
+        >
+          Performance starts here
+        </span>
 
-        <h2 class="text-4xl font-extrabold leading-tight sm:text-5xl">
-          Shop everything you need in one place
+        <h2 class="max-w-2xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+          Professional sports gear for training, speed and power.
         </h2>
 
-        <p class="mt-5 max-w-xl text-base leading-7 text-emerald-50 sm:text-lg">
-          Browse smart supermarket items with a clean, responsive, and modern shopping experience.
+        <p class="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
+          Explore premium sports accessories with a bold modern interface designed for athletes,
+          training lovers, and active lifestyles.
         </p>
 
-        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
           <a
             href="#products"
-            class="rounded-full bg-white px-6 py-3 text-center text-sm font-bold text-emerald-700 transition hover:scale-[1.02]"
+            class="inline-flex items-center justify-center rounded-full bg-lime-400 px-6 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.02]"
           >
             Shop Now
           </a>
 
           <a
-            href="#categories"
-            class="rounded-full border border-white/40 px-6 py-3 text-center text-sm font-bold text-white transition hover:bg-white/10"
+            href="#about"
+            class="inline-flex items-center justify-center rounded-full border border-slate-600 px-6 py-3 text-sm font-bold text-white transition hover:border-lime-400 hover:text-lime-400"
           >
-            Browse Categories
+            Explore Brand
           </a>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
-        <div class="rounded-3xl bg-white/10 p-6 backdrop-blur">
-          <p class="text-sm text-emerald-100">Fresh Picks</p>
-          <h3 class="mt-2 text-xl font-bold">Daily Use Items</h3>
-          <p class="mt-2 text-sm text-emerald-50">
-            Find home, beauty, grocery, and personal care products.
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <p class="text-sm text-lime-300">Top Picks</p>
+          <h3 class="mt-2 text-xl font-bold text-white">Cricket Gear</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-300">
+            Strong, stylish and built for match-day performance.
           </p>
         </div>
 
-        <div class="mt-10 rounded-3xl bg-white/10 p-6 backdrop-blur">
-          <p class="text-sm text-emerald-100">Easy Search</p>
-          <h3 class="mt-2 text-xl font-bold">Fast Filtering</h3>
-          <p class="mt-2 text-sm text-emerald-50">
-            Search quickly and filter by category in a few clicks.
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur sm:translate-y-8">
+          <p class="text-sm text-lime-300">New Collection</p>
+          <h3 class="mt-2 text-xl font-bold text-white">Training Kits</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-300">
+            Smart accessories for everyday practice and recovery.
           </p>
         </div>
 
-        <div class="rounded-3xl bg-white/10 p-6 backdrop-blur">
-          <p class="text-sm text-emerald-100">Modern Design</p>
-          <h3 class="mt-2 text-xl font-bold">Responsive Layout</h3>
-          <p class="mt-2 text-sm text-emerald-50">
-            Works smoothly on mobile, tablet, and desktop.
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <p class="text-sm text-lime-300">Built to Move</p>
+          <h3 class="mt-2 text-xl font-bold text-white">Fitness Essentials</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-300">
+            Modern products with clean design and athlete-first comfort.
           </p>
         </div>
 
-        <div class="mt-10 rounded-3xl bg-white/10 p-6 backdrop-blur">
-          <p class="text-sm text-emerald-100">Real Data</p>
-          <h3 class="mt-2 text-xl font-bold">API Powered</h3>
-          <p class="mt-2 text-sm text-emerald-50">
-            Product information is loaded from DummyJSON.
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur sm:translate-y-8">
+          <p class="text-sm text-lime-300">Premium Feel</p>
+          <h3 class="mt-2 text-xl font-bold text-white">Sport Style</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-300">
+            Responsive UI and fast shopping flow for your project demo.
           </p>
         </div>
       </div>
