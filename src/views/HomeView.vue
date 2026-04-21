@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-950">
+  <div class="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300">
     <NavBar />
     <HeroSection />
 

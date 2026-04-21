@@ -1,13 +1,13 @@
 <template>
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5 shadow-2xl shadow-black/20">
+    <div class="rounded-3xl border border-[var(--border-color)] bg-[var(--card-bg)] p-5 shadow-lg">
       <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div class="w-full lg:max-w-md">
           <input
             v-model="search"
             type="text"
             placeholder="Search sports products..."
-            class="w-full rounded-full border border-slate-700 bg-slate-950 px-5 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-lime-400"
+            class="w-full rounded-full border border-[var(--border-color)] bg-[var(--soft-bg)] px-5 py-3 text-sm text-[var(--text-main)] outline-none transition placeholder:text-[var(--text-soft)] focus:border-[var(--accent)]"
           />
         </div>
 
@@ -19,8 +19,8 @@
             :class="[
               'rounded-full px-4 py-2 text-sm font-semibold transition',
               selectedCategory === item
-                ? 'bg-lime-400 text-slate-950'
-                : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
+                ? 'bg-[var(--accent)] text-slate-950'
+                : 'bg-[var(--soft-bg)] text-[var(--text-main)] hover:opacity-90'
             ]"
           >
             {{ item }}
@@ -28,15 +28,15 @@
 
           <button
             @click="clearFilters"
-            class="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-lime-400 hover:text-lime-400"
+            class="rounded-full border border-[var(--border-color)] px-4 py-2 text-sm font-semibold text-[var(--text-main)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             Clear
           </button>
         </div>
       </div>
 
-      <p class="mt-4 text-sm text-slate-400">
-        Showing <span class="font-bold text-white">{{ resultCount }}</span> sports item(s)
+      <p class="mt-4 text-sm text-[var(--text-soft)]">
+        Showing <span class="font-bold text-[var(--text-main)]">{{ resultCount }}</span> sports item(s)
       </p>
     </div>
   </section>
